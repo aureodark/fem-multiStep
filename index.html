@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+
+  <title>Frontend Mentor | Multi-step form</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    @font-face {
+      font-family: "Ubuntu-Bold";
+      src: url(./assets/fonts/Ubuntu-Bold.ttf);
+    }
+
+    @font-face {
+      font-family: "Ubuntu-Medium";
+      src: url(./assets/fonts/Ubuntu-Medium.ttf);
+    }
+
+    @font-face {
+      font-family: "Ubuntu-Regular";
+      src: url(./assets/fonts/Ubuntu-Regular.ttf);
+    }
+
+    :root {
+      --font-400: "Ubuntu-Regular";
+      --font-500: "Ubuntu-Medium";
+      --font-700: "Ubuntu-Bold";
+      --marine-blue: #02295a;
+      --purplish-blue: #473dff;
+      --pastel-blue: #adbeff;
+      --light-blue: #bfe2fd;
+      --strawberry-red: #ed3548;
+      --cool-gray: #9699ab;
+      --light-gray: #d6d9e6;
+      --magnolia: #f0f6ff;
+      --alabaster: #fafbff;
+      --white: #ffffff;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: var(--magnolia);
+    }
+
+    h1,
+    p {
+      margin: 0;
+    }
+
+    main {
+      background: var(--white);
+      width: 940px;
+      max-width: 100%;
+      height: 600px;
+      padding: 15px;
+      display: flex;
+      border-radius: 15px;
+    }
+
+
+
+    .sidebar {
+      width: 30%;
+      height: 100%;
+      background-image: url(./assets/images/bg-sidebar-desktop.svg);
+      background-size: cover;
+      border-radius: 15px;
+    }
+
+    .steps {
+      font-family: var(--font-400);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 40px 40px;
+      font-size: 0.8rem;
+      gap: 25px;
+    }
+
+    .step {
+      display: flex;
+      color: var(--white);
+      align-items: center;
+
+    }
+
+
+    .step p span {
+      font-family: var(--font-400);
+      color: var(--pastel-blue);
+    }
+
+    .step p b {
+      letter-spacing: 0.1rem;
+    }
+
+    .roundedStep {
+      font-family: var(--font-700);
+      min-width: 35px;
+      min-height: 35px;
+      margin-right: 15px;
+      border: 1px solid var(--white);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 30px;
+      color: var(--white);
+
+    }
+
+    .content {
+      width: 70%;
+      display: flex;
+      flex-direction: column;
+      padding: 40px 80px;
+    }
+
+    h1 {
+      font-family: var(--font-700);
+      color: var(--marine-blue);
+      text-transform: capitalize;
+    }
+
+    .subtitle {
+      font-family: var(--font-400);
+      color: var(--cool-gray);
+      margin-bottom: 30px;
+    }
+
+    label {
+      font-family: var(--font-500);
+      color: var(--marine-blue);
+
+    }
+
+    input {
+      width: 100%;
+      border-radius: 7px;
+      padding: 7px;
+      margin: 5px 0 20px 0;
+      border: 1px solid var(--light-gray);
+    }
+
+    input:focus {
+      outline: 1px solid var(--marine-blue);
+
+    }
+
+    form {
+      position: relative;
+      height: 100%;
+    }
+
+
+    .plans {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 40px;
+    }
+
+    .plans label {
+      width: 33%;
+    }
+
+    .plans label input {
+      visibility: hidden;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .boxPay {
+      border: 1px solid var(--light-gray);
+      border-radius: 10px;
+      min-height: 160px;
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: 0.4s;
+    }
+
+    .boxPay:hover {
+      background: var(--magnolia);
+      border: 1px solid var(--purplish-blue);
+
+    }
+
+
+
+    label input:checked+.boxPay {
+      background: var(--magnolia);
+      border: 1px solid var(--purplish-blue);
+    }
+
+    .boxPay .tPrice {
+      display: flex;
+      flex-direction: column;
+    }
+
+
+
+    #opt1 {
+      background-image: url(./assets/images/icon-arcade.svg);
+      height: 40px;
+      width: 40px;
+    }
+
+    #opt2 {
+      background-image: url(./assets/images/icon-advanced.svg);
+      height: 40px;
+      width: 40px;
+    }
+
+    #opt3 {
+      background-image: url(./assets/images/icon-pro.svg);
+      height: 40px;
+      width: 40px;
+    }
+
+
+    .switchOpt {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      background-color: var(--magnolia);
+      border-radius: 7px;
+      align-items: center;
+      font-family: var(--font-500);
+      color: var(--marine-blue);
+    }
+
+    .form-switch {
+      padding-left: 50px !important;
+    }
+
+    #step3 {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    #step3>div {
+      position: relative;
+
+    }
+
+    .optsAddons {
+      border: 1px solid var(--light-gray);
+      border-radius: 7px;
+      position: relative;
+      transition: 0.4s;
+    }
+
+
+
+    .optsAddons label {
+      display: flex;
+      justify-content: space-between;
+      padding: 20px;
+      align-items: center;
+    }
+
+    #step3 input {
+      position: absolute;
+      z-index: 1;
+      top: 30px;
+      left: 20px;
+    }
+
+    .optAddon {
+      padding-left: 20px;
+    }
+
+    .titleAddon {
+      font-family: var(--font-700);
+    }
+
+    .subtitleAddon {
+      font-family: var(--font-400);
+      color: var(--cool-gray);
+    }
+
+    .priceAddon {
+      color: var(--purplish-blue);
+    }
+
+
+    .optsAddons:hover {
+      background: var(--magnolia);
+      border: 1px solid var(--purplish-blue);
+
+    }
+
+
+
+    #step3 input:checked+.optsAddons {
+      background: var(--magnolia);
+      border: 1px solid var(--purplish-blue);
+    }
+
+
+
+
+
+
+    #step4 {
+      width: 100%;
+    }
+
+    .tableStep4 {
+      padding: 20px;
+      width: 100%;
+      border-radius: 6px;
+    }
+
+    .tableStep4 table {
+      width: 100%;
+    }
+
+
+    .tableStep4 table td {
+      text-align: right;
+
+    }
+
+    .tableStep4 table thead {
+      border-bottom: 2px solid var(--light-gray);
+    }
+
+    .tableStep4 table thead th {
+      font-family: var(--font-700);
+      color: var(--marine-blue);
+      padding-bottom: 20px;
+    }
+
+    .tableStep4:nth-child(1) {
+      background: var(--alabaster);
+    }
+
+    .tableStep4 table tbody tr th,
+    .tableStep4 table tfoot tr th {
+      font-weight: unset !important;
+      font-family: var(--font-400);
+      color: var(--cool-gray);
+
+    }
+
+    .tableStep4 table thead td {
+      font-family: var(--font-700);
+      color: var(--marine-blue);
+
+    }
+
+    .tableStep4 table tbody td {
+      font-family: var(--font-400);
+      color: var(--marine-blue);
+      padding: 10px 0 5px 0;
+    }
+
+
+    .tableStep4 table tfoot td {
+      font-family: var(--font-700);
+      color: var(--purplish-blue);
+      font-size: 1.2rem;
+    }
+
+
+
+
+
+
+    .buttons {
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .btn-primary {
+      background: var(--marine-blue);
+    }
+
+    .displayN {
+      display: none !important;
+    }
+
+    .attribution {
+      font-size: 11px;
+      text-align: center;
+    }
+
+    .attribution a {
+      color: #3e52a3;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <div class="sidebar">
+      <div class="steps">
+        <div class="step">
+          <div id="stepCheck1" class="roundedStep">1</div>
+          <div>
+            <p><span>STEP 1</span><br><b>YOUR INFO</b></p>
+          </div>
+        </div>
+        <div class="step">
+          <div id="stepCheck2" class="roundedStep">2</div>
+          <div>
+            <p><span>STEP 2</span><br><b>SELECT PLAN</b></p>
+          </div>
+        </div>
+        <div class="step">
+          <div id="stepCheck3" class="roundedStep">3</div>
+          <div>
+            <p><span>STEP 3</span><br><b>ADD-ONS</b></p>
+          </div>
+        </div>
+        <div class="step">
+          <div id="stepCheck4" class="roundedStep">4</div>
+          <div>
+            <p><span>STEP 4</span><br><b>SUMMARY</b></p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="content">
+      <h1>change</h1>
+      <p class="subtitle">change</p>
+      <form action="">
+
+        <!-- Step 1 -->
+        <div id="step1" class="displayN">
+          <label for="name">Name</label><br>
+          <input type="text" id="name"><br>
+
+          <label for="email">E-mail Address</label><br>
+          <input type="text" id="email"><br>
+
+          <label for="phone">Phone Number</label><br>
+          <input type="text" id="phone"><br>
+        </div>
+
+        <!-- Step 2 -->
+        <div id="step2" class="displayN">
+          <div class="plans">
+
+
+            <label for="payArcade">
+              <input type="radio" id="payArcade" name="plans">
+              <div class="boxPay">
+                <div id="opt1"></div>
+                <div class="tPrice">
+                  <span class="titleOpt">Arcade</span>
+                  <span class="priceOpt">$9/mo</span>
+                </div>
+              </div>
+            </label>
+
+            <label for="payAdvanced">
+              <input type="radio" id="payAdvanced" name="plans">
+              <div class="boxPay">
+                <div id="opt2"></div>
+                <div class="tPrice">
+                  <span class="titleOpt">Advanced</span>
+                  <span class="priceOpt">$12/mo</span>
+                </div>
+              </div>
+            </label>
+
+            <label for="payPro">
+              <input type="radio" id="payPro" name="plans">
+              <div class="boxPay">
+                <div id="opt3"></div>
+                <div class="tPrice">
+                  <span class="titleOpt">Pro</span>
+                  <span class="priceOpt">$15/mo</span>
+                </div>
+              </div>
+            </label>
+          </div>
+
+          <div class="switchOpt">
+            <span>Monthly</span>
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+            </div>
+            <span>Yearly</span>
+          </div>
+        </div>
+
+
+        <!-- Step 3 -->
+        <div id="step3" class="displayN">
+          <div>
+            <input class="form-check-input" type="checkbox" value="" id="online">
+            <div class="form-check optsAddons">
+              <label class="form-check-label" for="online">
+                <div class="optAddon">
+                  <div class="titleAddon">Online service</div>
+                  <div class="subtitleAddon">Access to multiplayer games</div>
+                </div>
+                <span class="priceAddon">+$1/mo</span>
+              </label>
+            </div>
+          </div>
+
+          <div>
+            <input class="form-check-input" type="checkbox" value="" id="storage">
+            <div class="form-check optsAddons">
+              <label class="form-check-label" for="storage">
+                <div class="optAddon">
+                  <div class="titleAddon">Larger storage</div>
+                  <div class="subtitleAddon">Extra 1TB of cloud save</div>
+                </div>
+                <span class="priceAddon">+$2/mo</span>
+              </label>
+            </div>
+          </div>
+
+          <div>
+            <input class="form-check-input" type="checkbox" value="" id="profile">
+            <div class="form-check optsAddons">
+              <label class="form-check-label" for="profile">
+                <div class="optAddon">
+                  <div class="titleAddon">Customizable Profile</div>
+                  <div class="subtitleAddon">Custom theme on your profile</div>
+                </div>
+                <span class="priceAddon">+$2/mo</span>
+              </label>
+            </div>
+          </div>
+
+
+        </div>
+
+        <!-- Step 4 -->
+        <div id="step4" class="">
+          <div class="tableStep4">
+            <table>
+              <thead>
+                <tr>
+                  <th>Arcade (Monthly)<br><a href="">Change</a></th>
+                  <td>$9/mo</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>Online service</th>
+                  <td>+$1/mo</td>
+                </tr>
+                <tr>
+                  <th>Larger storage</th>
+                  <td>+$2/mo</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tableStep4">
+            <table>
+              <tfoot>
+                <tr>
+                  <th>Total (per month)</th>
+                  <td>+$12/mo</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+        <div class="buttons">
+          <button type="button" class="btn btn-primary">Go back</button>
+          <button type="button" class="btn btn-primary">Next step</button>
+          <button class="btn btn-primary displayN">Confirm</button>
+        </div>
+      </form>
+      <!-- thanks -->
+    </div>
+  </main>
+
+  <footer class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+    Coded by <a href="#">Your Name Here</a>.
+  </footer>
+
+
+
+  <script src="script.js"></script>
+</body>
+
+</html>
