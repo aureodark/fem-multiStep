@@ -245,13 +245,13 @@
       padding-left: 50px !important;
     }
 
-    #step3 {
+    #step2 {
       display: flex;
       flex-direction: column;
       gap: 15px;
     }
 
-    #step3>div {
+    #step2>div {
       position: relative;
 
     }
@@ -272,7 +272,7 @@
       align-items: center;
     }
 
-    #step3 input {
+    #step2 input {
       position: absolute;
       z-index: 1;
       top: 30px;
@@ -305,7 +305,7 @@
 
 
 
-    #step3 input:checked+.optsAddons {
+    #step2 input:checked+.optsAddons {
       background: var(--magnolia);
       border: 1px solid var(--purplish-blue);
     }
@@ -315,62 +315,62 @@
 
 
 
-    #step4 {
+    #step3 {
       width: 100%;
     }
 
-    .tableStep4 {
+    .tableStep3 {
       padding: 20px;
       width: 100%;
       border-radius: 6px;
     }
 
-    .tableStep4 table {
+    .tableStep3 table {
       width: 100%;
     }
 
 
-    .tableStep4 table td {
+    .tableStep3 table td {
       text-align: right;
 
     }
 
-    .tableStep4 table thead {
+    .tableStep3 table thead {
       border-bottom: 2px solid var(--light-gray);
     }
 
-    .tableStep4 table thead th {
+    .tableStep3 table thead th {
       font-family: var(--font-700);
       color: var(--marine-blue);
       padding-bottom: 20px;
     }
 
-    .tableStep4:nth-child(1) {
+    .tableStep3:nth-child(1) {
       background: var(--alabaster);
     }
 
-    .tableStep4 table tbody tr th,
-    .tableStep4 table tfoot tr th {
+    .tableStep3 table tbody tr th,
+    .tableStep3 table tfoot tr th {
       font-weight: unset !important;
       font-family: var(--font-400);
       color: var(--cool-gray);
 
     }
 
-    .tableStep4 table thead td {
+    .tableStep3 table thead td {
       font-family: var(--font-700);
       color: var(--marine-blue);
 
     }
 
-    .tableStep4 table tbody td {
+    .tableStep3 table tbody td {
       font-family: var(--font-400);
       color: var(--marine-blue);
       padding: 10px 0 5px 0;
     }
 
 
-    .tableStep4 table tfoot td {
+    .tableStep3 table tfoot td {
       font-family: var(--font-700);
       color: var(--purplish-blue);
       font-size: 1.2rem;
@@ -389,12 +389,64 @@
       justify-content: space-between;
     }
 
+    #nextBtn,
+    #confirmBtn {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+    }
+
+    #changeBtn {
+      background: transparent;
+      border: unset;
+      padding: 0;
+      color: var(--cool-gray);
+      font-family: var(--font-500);
+      text-decoration: underline;
+      transition: 0.2s;
+    }
+
+    #changeBtn:hover {
+      color: var(--purplish-blue);
+    }
+
     .btn-primary {
       background: var(--marine-blue);
     }
 
-    .displayN {
-      display: none !important;
+
+
+    .step-active {
+      background: var(--light-blue);
+      color: var(--marine-blue);
+      border: 0px solid;
+    }
+
+    .no-active {
+      height: 0;
+      width: 0;
+      overflow: hidden;
+      padding: 0;
+      border: 0;
+    }
+
+    .active {
+      overflow: hidden;
+      animation-name: example;
+      animation-duration: 0.4s;
+    }
+
+    @keyframes example {
+      from {
+        opacity: 0;
+
+        visibility: hidden;
+      }
+
+      to {
+        opacity: 1;
+        visibility: visible;
+      }
     }
 
     .attribution {
@@ -413,25 +465,25 @@
     <div class="sidebar">
       <div class="steps">
         <div class="step">
-          <div id="stepCheck1" class="roundedStep">1</div>
+          <div id="stepCheck0" class="roundedStep step-active">1</div>
           <div>
             <p><span>STEP 1</span><br><b>YOUR INFO</b></p>
           </div>
         </div>
         <div class="step">
-          <div id="stepCheck2" class="roundedStep">2</div>
+          <div id="stepCheck1" class="roundedStep">2</div>
           <div>
             <p><span>STEP 2</span><br><b>SELECT PLAN</b></p>
           </div>
         </div>
         <div class="step">
-          <div id="stepCheck3" class="roundedStep">3</div>
+          <div id="stepCheck2" class="roundedStep">3</div>
           <div>
             <p><span>STEP 3</span><br><b>ADD-ONS</b></p>
           </div>
         </div>
         <div class="step">
-          <div id="stepCheck4" class="roundedStep">4</div>
+          <div id="stepCheck3" class="roundedStep">4</div>
           <div>
             <p><span>STEP 4</span><br><b>SUMMARY</b></p>
           </div>
@@ -440,12 +492,12 @@
       </div>
     </div>
     <div class="content">
-      <h1>change</h1>
-      <p class="subtitle">change</p>
+      <h1 id="titleContent">change</h1>
+      <p id="subtitleContent" class="subtitle">change</p>
       <form action="">
 
         <!-- Step 1 -->
-        <div id="step1" class="displayN">
+        <div id="step0" class="active">
           <label for="name">Name</label><br>
           <input type="text" id="name"><br>
 
@@ -457,7 +509,7 @@
         </div>
 
         <!-- Step 2 -->
-        <div id="step2" class="displayN">
+        <div id="step1" class="no-active">
           <div class="plans">
 
 
@@ -506,7 +558,7 @@
 
 
         <!-- Step 3 -->
-        <div id="step3" class="displayN">
+        <div id="step2" class="no-active">
           <div>
             <input class="form-check-input" type="checkbox" value="" id="online">
             <div class="form-check optsAddons">
@@ -550,12 +602,12 @@
         </div>
 
         <!-- Step 4 -->
-        <div id="step4" class="">
-          <div class="tableStep4">
+        <div id="step3" class="no-active">
+          <div class="tableStep3">
             <table>
               <thead>
                 <tr>
-                  <th>Arcade (Monthly)<br><a href="">Change</a></th>
+                  <th>Arcade (Monthly)<br><button type="button" id="changeBtn" onclick="handleClickBack(0)">Change</button></th>
                   <td>$9/mo</td>
                 </tr>
               </thead>
@@ -571,7 +623,7 @@
               </tbody>
             </table>
           </div>
-          <div class="tableStep4">
+          <div class="tableStep3">
             <table>
               <tfoot>
                 <tr>
@@ -583,9 +635,9 @@
           </div>
         </div>
         <div class="buttons">
-          <button type="button" class="btn btn-primary">Go back</button>
-          <button type="button" class="btn btn-primary">Next step</button>
-          <button class="btn btn-primary displayN">Confirm</button>
+          <button type="button" id="backBtn" class="btn btn-primary" onclick="handleClickBack()">Go back</button>
+          <button id="nextBtn" type="button" class="btn btn-primary active" onclick="handleClickGo()">Next step</button>
+          <button id="confirmBtn" class="btn btn-primary  no-active">Confirm</button>
         </div>
       </form>
       <!-- thanks -->
