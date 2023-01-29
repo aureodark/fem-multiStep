@@ -145,9 +145,36 @@
     input {
       width: 100%;
       border-radius: 7px;
-      padding: 7px;
+      padding: 10px 15px;
       margin: 5px 0 20px 0;
       border: 1px solid var(--light-gray);
+      font-family: var(--font-500);
+      color: var(--marine-blue);
+    }
+
+    input::placeholder {
+      color: var(--cool-gray);
+    }
+
+    /* required for inputs */
+    .titleInput {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      color: var(--strawberry-red);
+      font-family: var(--font-700);
+    }
+
+    #requiredP {
+      color: var(--strawberry-red);
+      font-family: var(--font-700);
+      margin-bottom: 5px;
+      display: none;
+    }
+
+
+    #step0 {
+      padding: 1px;
     }
 
     input:focus {
@@ -179,10 +206,25 @@
       left: 0;
     }
 
+    .priceOpt {
+      color: var(--cool-gray);
+      font-family: var(--font-400);
+
+    }
+
+    .monthsFree {
+      font-size: 14px;
+      display: none;
+    }
+
+
+
+
+
     .boxPay {
       border: 1px solid var(--light-gray);
       border-radius: 10px;
-      min-height: 160px;
+      min-height: 180px;
       padding: 15px;
       display: flex;
       flex-direction: column;
@@ -243,6 +285,7 @@
 
     .form-switch {
       padding-left: 50px !important;
+      margin-top: 15px;
     }
 
     #step2 {
@@ -497,21 +540,28 @@
       <form action="">
 
         <!-- Step 1 -->
-        <div id="step0" class="active">
-          <label for="name">Name</label><br>
-          <input type="text" id="name"><br>
+        <div id="step0" class="no-active">
+          <div class="titleInput">
+            <label for="name">Name</label><span id="nameRequired"></span>
+          </div>
+          <input type="text" id="name" placeholder="e.g. Stephen King" required><br>
 
-          <label for="email">E-mail Address</label><br>
-          <input type="text" id="email"><br>
 
-          <label for="phone">Phone Number</label><br>
-          <input type="text" id="phone"><br>
+          <div class="titleInput">
+            <label for="email">E-mail Address</label><span id="emailRequired"></span>
+          </div>
+          <input type="text" id="email" placeholder="e.g. stephenking@lorem.com" required><br>
+
+          <div class="titleInput">
+            <label for="phone">Phone Number</label><span id="phoneRequired"></span>
+          </div>
+          <input type="text" id="phone" placeholder="e.g. +1 234 567 890" required><br>
         </div>
 
         <!-- Step 2 -->
-        <div id="step1" class="no-active">
+        <div id="step1" class="active">
+          <div id="requiredP">This step is required select your plan</div>
           <div class="plans">
-
 
             <label for="payArcade">
               <input type="radio" id="payArcade" name="plans">
@@ -520,6 +570,7 @@
                 <div class="tPrice">
                   <span class="titleOpt">Arcade</span>
                   <span class="priceOpt">$9/mo</span>
+                  <span class="monthsFree">2 months free</span>
                 </div>
               </div>
             </label>
@@ -531,6 +582,7 @@
                 <div class="tPrice">
                   <span class="titleOpt">Advanced</span>
                   <span class="priceOpt">$12/mo</span>
+                  <span class="monthsFree">2 months free</span>
                 </div>
               </div>
             </label>
@@ -542,6 +594,7 @@
                 <div class="tPrice">
                   <span class="titleOpt">Pro</span>
                   <span class="priceOpt">$15/mo</span>
+                  <span class="monthsFree">2 months free</span>
                 </div>
               </div>
             </label>
@@ -550,7 +603,7 @@
           <div class="switchOpt">
             <span>Monthly</span>
             <div class="form-check form-switch">
-              <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+              <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" onclick="switchChange()">
             </div>
             <span>Yearly</span>
           </div>

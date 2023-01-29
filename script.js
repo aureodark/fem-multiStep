@@ -19,6 +19,67 @@ var titleSub = [
   },
 ];
 
+function switchChange() {
+  console.dir(document.getElementById('flexSwitchCheckDefault').checked);
+}
+
+function validateFocusOut() {}
+
+function validateNext() {
+  let validateTrueFalse = 0;
+  // step 0
+  if (document.getElementById('name').value == '') {
+    document.getElementById('nameRequired').innerText =
+      'This field is required';
+    document.getElementById('name').style.border =
+      '1px solid var(--strawberry-red)';
+    validateTrueFalse = 1;
+  } else {
+    document.getElementById('nameRequired').innerText = '';
+    document.getElementById('name').style.border =
+      '1px solid var(--light-gray)';
+  }
+  if (document.getElementById('email').value == '') {
+    document.getElementById('emailRequired').innerText =
+      'This field is required';
+    document.getElementById('email').style.border =
+      '1px solid var(--strawberry-red)';
+    validateTrueFalse = 1;
+  } else {
+    document.getElementById('emailRequired').innerText = '';
+    document.getElementById('email').style.border =
+      '1px solid var(--light-gray)';
+  }
+  if (document.getElementById('phone').value == '') {
+    document.getElementById('phoneRequired').innerText =
+      'This field is required';
+    document.getElementById('phone').style.border =
+      '1px solid var(--strawberry-red)';
+    validateTrueFalse = 1;
+  } else {
+    document.getElementById('phoneRequired').innerText = '';
+    document.getElementById('phone').style.border =
+      '1px solid var(--light-gray)';
+  }
+  // step 0
+
+  var payArcade = document.getElementById('payArcade').checked;
+  var payAdvanced = document.getElementById('payAdvanced').checked;
+  var payPro = document.getElementById('payPro').checked;
+
+  if (x == 0 && validateTrueFalse == 1) {
+    return false;
+  } else if (x == 0 && validateTrueFalse == 0) {
+    return true;
+  } else if ((x == 1 && payArcade) || payAdvanced || payPro) {
+    document.getElementById('requiredP').style.display = 'none';
+    return true;
+  } else {
+    document.getElementById('requiredP').style.display = 'block';
+    return false;
+  }
+}
+
 document.getElementById('titleContent').innerHTML = titleSub[x].title;
 document.getElementById('subtitleContent').innerHTML = titleSub[x].subtitle;
 document.getElementById('backBtn').classList.remove('active');
@@ -66,17 +127,17 @@ function handleClickBack(param) {
 }
 function handleClickGo() {
   document.getElementById('changeBtn').removeAttribute('disabled', '');
-  if (x == 0) {
+  if (x == 0 && validateNext()) {
     document.getElementById('backBtn').classList.remove('no-active');
     document.getElementById('backBtn').classList.add('active');
   }
-  if (x == 2) {
+  if (x == 2 && validateNext()) {
     document.getElementById('nextBtn').classList.remove('active');
     document.getElementById('nextBtn').classList.add('no-active');
     document.getElementById('confirmBtn').classList.remove('no-active');
     document.getElementById('confirmBtn').classList.add('active');
   }
-  if (x <= 2) {
+  if (x <= 2 && validateNext()) {
     // noactive step
     let y = x;
     document.getElementById('step' + y).classList.remove('active');
